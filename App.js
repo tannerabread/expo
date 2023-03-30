@@ -1,9 +1,16 @@
+import 'react-native-get-random-values';
+import 'react-native-url-polyfill/auto';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import {Amplify} from 'aws-amplify';
+import {Amplify, Notifications} from 'aws-amplify';
 import config from './aws-exports';
 Amplify.configure(config);
+Amplify.Logger.LOG_LEVEL = 'DEBUG';
+
+const {InAppMessaging} = Notifications;
+InAppMessaging.syncMessages();
 
 export default function App() {
   return (
