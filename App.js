@@ -1,10 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import {Amplify} from 'aws-amplify';
+import {Amplify, Hub} from 'aws-amplify';
 import config from './aws-exports';
 Amplify.configure(config);
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
+
+Hub.listen('DogsChannel', data => {
+  const {payload} = data;
+  console.log({payload});
+});
+
+Hub.dispatch('DogsChannel', {
+  event: 'buttonClick',
+  data: {color: 'blue'},
+  message: 'testMessage',
+});
 
 export default function App() {
   return (
