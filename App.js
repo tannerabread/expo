@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import {Amplify} from 'aws-amplify';
 import config from './aws-exports';
 Amplify.configure(config);
+Amplify.Logger.LOG_LEVEL = 'DEBUG';
 
 export default function App() {
   return (
