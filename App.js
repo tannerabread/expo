@@ -3,8 +3,23 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import {Amplify} from 'aws-amplify';
 import config from './aws-exports';
+import {
+  Predictions,
+  AmazonAIPredictionsProvider,
+} from '@aws-amplify/predictions';
 Amplify.configure(config);
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
+Amplify.addPluggable(new AmazonAIPredictionsProvider());
+
+Predictions.convert({
+  translateText: {
+    source: {
+      text: 'Hello World',
+    },
+  },
+})
+  .then(result => console.log({result}))
+  .catch(err => console.log({err}));
 
 export default function App() {
   return (
