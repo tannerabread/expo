@@ -43,7 +43,19 @@ const awsmobile = {
     "aws_user_files_s3_bucket_region": "us-east-1",
     "aws_mobile_analytics_app_id": "b1d059dda10944a0b281222c06a5b005",
     "aws_mobile_analytics_app_region": "us-east-1",
+    "Analytics": {
+        "AWSPinpoint": {
+            "appId": "b1d059dda10944a0b281222c06a5b005",
+            "region": "us-east-1"
+        }
+    },
     "Notifications": {
+        "Push": {
+            "AWSPinpoint": {
+                "appId": "b1d059dda10944a0b281222c06a5b005",
+                "region": "us-east-1"
+            }
+        },
         "InAppMessaging": {
             "AWSPinpoint": {
                 "appId": "b1d059dda10944a0b281222c06a5b005",
@@ -63,7 +75,23 @@ const awsmobile = {
             "alias": "$LATEST",
             "region": "us-east-1"
         }
-    ]
+    ],
+    "aws_appsync_graphqlEndpoint": "https://it3kjbawffglrmi4fgk6k56z6y.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_appsync_region": "us-east-1",
+    "aws_appsync_authenticationType": "API_KEY",
+    "aws_appsync_apiKey": "da2-fwnlszj4xvge5jjdh5inlrcdtq",
+    "predictions": {
+        "convert": {
+            "translateText": {
+                "region": "us-east-1",
+                "proxy": false,
+                "defaults": {
+                    "sourceLanguage": "en",
+                    "targetLanguage": "de"
+                }
+            }
+        }
+    }
 };
 
 
