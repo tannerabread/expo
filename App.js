@@ -1,19 +1,20 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 import { Amplify, DataStore } from "aws-amplify";
 import { Todo } from "./models";
-import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter/SQLiteAdapter';
-import 'core-js/full/symbol/async-iterator';
+import { ExpoSQLiteAdapter } from "@aws-amplify/datastore-storage-adapter/ExpoSQLiteAdapter";
+import "core-js/full/symbol/async-iterator";
 import config from "./aws-exports";
 Amplify.configure({
   ...config,
   DataStore: {
-    storageAdapter: SQLiteAdapter,
+    storageAdapter: ExpoSQLiteAdapter,
     authModeStrategyType: "MULTI_AUTH",
-  }
+  },
 });
-Amplify.Logger.LOG_LEVEL = "DEBUG";
+// Amplify.configure(config);
+// Amplify.Logger.LOG_LEVEL = "DEBUG";
 
 async function saveDatastoreTodo() {
   try {
@@ -23,6 +24,7 @@ async function saveDatastoreTodo() {
         description: "hello datastore!",
       })
     );
+    console.log("post: ", JSON.stringify(post, null, 2));
   } catch (error) {
     console.log(error);
   }
@@ -40,10 +42,19 @@ async function readDatastore() {
 readDatastore();
 
 export default function App() {
+  async function readDatastore() {
+    try {
+      const todos = await DataStore.query(Todo);
+      console.log("todos: ", JSON.stringify(todos, null, 2));
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+      <Button title="Read" onPress={readDatastore} />
     </View>
   );
 }
