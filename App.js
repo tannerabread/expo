@@ -3,18 +3,15 @@ import { Button, StyleSheet, Text, View } from "react-native";
 
 import { Amplify, DataStore } from "aws-amplify";
 import { Todo } from "./models";
-import { ExpoSQLiteAdapter } from "@aws-amplify/datastore-storage-adapter/ExpoSQLiteAdapter";
 import "core-js/full/symbol/async-iterator";
 import config from "./aws-exports";
 Amplify.configure({
   ...config,
   DataStore: {
-    storageAdapter: ExpoSQLiteAdapter,
     authModeStrategyType: "MULTI_AUTH",
   },
 });
-// Amplify.configure(config);
-// Amplify.Logger.LOG_LEVEL = "DEBUG";
+Amplify.Logger.LOG_LEVEL = "DEBUG";
 
 async function saveDatastoreTodo() {
   try {
